@@ -1,0 +1,33 @@
+<div class="login-container">
+    <form class="login-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="header">
+            <img src="/assets/pictures/fluxenture_logo.svg" alt="logo" class="logo">
+            <p class="title">Iniciar sesión</p>
+        </div>
+
+        <div class="form-content">
+            <mat-form-field appearance="outline">
+                <mat-label>Email</mat-label>
+                <input matInput type="email" formControlName="email" />
+                <mat-error *ngIf="form.get('email')?.errors?.['email']">El email no es válido</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Contraseña</mat-label>
+                <input matInput type="password" formControlName="password" />
+            </mat-form-field>
+        </div>
+
+        @if(errMsg()) {
+        <div class="auth-error-messagge">
+            <mat-icon>error</mat-icon>
+            <span>Email o contraseña incorrectos</span>
+        </div>
+        }
+        <button mat-flat-button type="submit" color="primary">Iniciar sesión</button>
+    </form>
+
+
+    <p class="footer">
+        <span>2026 Fluxenture. Creado por industria Servaltek.</span>
+    </p>
+</div>

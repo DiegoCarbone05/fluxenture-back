@@ -3,5 +3,110 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
+    "macrotool": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss",
+          "standalone": false
+        },
+        "@schematics/angular:directive": {
+          "standalone": false
+        },
+        "@schematics/angular:pipe": {
+          "standalone": false
+        }
+      },
+      "root": "projects/macrotool",
+      "sourceRoot": "projects/macrotool/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:application",
+          "options": {
+            "browser": "projects/macrotool/src/main.ts",
+            "outputPath": "dist/macrotool",
+            "tsConfig": "projects/macrotool/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "projects/macrotool/public"
+              },
+              {
+                "glob": "**/*",
+                "input": "projects/macrotool/src/assets",
+                "output": "/assets"
+              }
+            ],
+            "styles": [
+              "projects/macrotool/src/styles.scss"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kB",
+                  "maximumError": "1MB"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "4kB",
+                  "maximumError": "8kB"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular/build:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "macrotool:build:production"
+            },
+            "development": {
+              "buildTarget": "macrotool:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular/build:extract-i18n"
+        },
+        "test": {
+          "builder": "@angular/build:karma",
+          "options": {
+            "tsConfig": "projects/macrotool/tsconfig.spec.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "projects/macrotool/public"
+              },
+              {
+                "glob": "**/*",
+                "input": "projects/macrotool/src/assets",
+                "output": "/assets"
+              }
+            ],
+            "styles": [
+              "projects/macrotool/src/styles.scss"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "analytics": "92764ae2-c783-4e8c-9627-eb4eb4cd67eb"
   }
 }

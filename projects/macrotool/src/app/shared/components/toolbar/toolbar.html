@@ -1,0 +1,11 @@
+<mat-toolbar class="toolbar-custom">
+    <div class="toolbar-content">
+        <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon"
+            (click)="clickMenu()">
+            <mat-icon>menu</mat-icon>
+        </button>
+        <span>{{title}}</span>
+    </div>
+    <ng-content></ng-content>
+
+</mat-toolbar>

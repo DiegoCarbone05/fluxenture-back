@@ -1,0 +1,13 @@
+.status-chip-container{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.success-icon{
+    color: rgb(0, 190, 117);
+}
+
+.error-icon{
+    color: rgb(255, 0, 0);
+}

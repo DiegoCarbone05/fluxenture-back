@@ -1,0 +1,13 @@
+@if (status === 'N/A') {
+<div class="status-chip-container">
+    <mat-spinner diameter="20"></mat-spinner>
+    <span>ESTATUS PENDIENTE</span>
+</div>
+} @else if (status === 'Error') {
+<mat-icon>error</mat-icon>
+} @else {
+<div class="status-chip-container">
+    <mat-icon class="success-icon">check_circle</mat-icon>
+    <span>{{ status }}</span>
+</div>
+}

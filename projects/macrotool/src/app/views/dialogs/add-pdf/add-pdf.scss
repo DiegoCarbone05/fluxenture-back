@@ -1,0 +1,25 @@
+.add-pdf-container{
+    display: flex;
+    padding: 20px;
+    flex-direction: column;
+    gap: 20px;
+    background-color: var(--mat-sys-surface-container-high);
+    border-radius: 10px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+
+    form, mat-form-field{
+        width: 100%;
+
+    }
+    .pdf-path-label{
+        width: 90%;
+    }
+    .pdf-path-container{
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        align-items: center;
+        width: 100%;
+    }
+}

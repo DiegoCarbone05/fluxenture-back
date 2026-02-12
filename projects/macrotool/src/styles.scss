@@ -1,0 +1,156 @@
+@use '@angular/material' as mat;
+
+// Angular Material theme (Material Design 2 / M2).
+// Note: This intentionally avoids the Material 3 `mat.theme()` API.
+@include mat.core();
+
+$primary: mat.m2-define-palette(mat.$m2-indigo-palette);
+$accent: mat.m2-define-palette(mat.$m2-pink-palette, A200, A100, A400);
+$warn: mat.m2-define-palette(mat.$m2-red-palette);
+
+$macrotools-theme: mat.m2-define-light-theme((color: (primary: $primary,
+        accent: $accent,
+        warn: $warn,
+      ),
+      density: 0,
+    ));
+
+@include mat.all-component-themes($macrotools-theme);
+
+$app-background-color: #ffffff;
+$app-text-color: #333333;
+$app-font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+$app-font-size: 16px;
+$app-line-height: 1.5;
+
+body {
+  min-height: 100vh;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: $app-font-family;
+  background-color: $app-background-color;
+  color: $app-text-color;
+  line-height: $app-line-height;
+  font-size: $app-font-size;
+  overflow: hidden;
+  text-rendering: optimizeLegibility;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+// Material Symbols (MD3) configuration
+// Default icon weight: 400 (Regular)
+$icon-weight-default: 400;
+$icon-weight-thin: 100;
+$icon-weight-semithin: 200;
+$icon-weight-light: 300;
+$icon-weight-regular: 400;
+$icon-weight-medium: 500;
+$icon-weight-semibold: 600;
+$icon-weight-bold: 700;
+
+// Configure mat-icon to use Material Symbols
+mat-icon {
+  font-family: 'Material Symbols Outlined';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  font-feature-settings: 'liga';
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+
+  // Default weight configuration
+  font-variation-settings:
+    'FILL' 0,
+    'wght'$icon-weight-light,
+    'GRAD' 0,
+    'opsz' 24;
+}
+
+// Icon weight utility classes
+.mat-icon-weight-thin {
+  font-variation-settings:
+    'FILL' 0,
+    'wght'$icon-weight-thin,
+    'GRAD' 0,
+    'opsz' 24;
+}
+
+.mat-icon-weight-light {
+  font-variation-settings:
+    'FILL' 0,
+    'wght'$icon-weight-light,
+    'GRAD' 0,
+    'opsz' 24;
+}
+
+.mat-icon-weight-regular {
+  font-variation-settings:
+    'FILL' 0,
+    'wght'$icon-weight-regular,
+    'GRAD' 0,
+    'opsz' 24;
+}
+
+.mat-icon-weight-medium {
+  font-variation-settings:
+    'FILL' 0,
+    'wght'$icon-weight-medium,
+    'GRAD' 0,
+    'opsz' 24;
+}
+
+.mat-icon-weight-semibold {
+  font-variation-settings:
+    'FILL' 0,
+    'wght'$icon-weight-semibold,
+    'GRAD' 0,
+    'opsz' 24;
+}
+
+.mat-icon-weight-bold {
+  font-variation-settings:
+    'FILL' 0,
+    'wght'$icon-weight-bold,
+    'GRAD' 0,
+    'opsz' 24;
+}
+
+// Filled variant (optional)
+.mat-icon-filled {
+  font-variation-settings:
+    'FILL' 1,
+    'wght'$icon-weight-default,
+    'GRAD' 0,
+    'opsz' 24;
+}
+
+
+mat-drawer {
+  width: 30vw !important;
+  max-width: 300px !important;
+  min-width: 150px !important;
+
+
+  mat-list-item {
+    &:hover {
+      background-color: #f0f0f0;
+      cursor: pointer;
+    }
+  }
+}
+
+mat-drawer-container{
+  height: 100%;
+}

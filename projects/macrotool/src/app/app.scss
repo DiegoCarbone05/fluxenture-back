@@ -1,0 +1,15 @@
+.app-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+
+
+    z-index: 1000;
+
+    .app-content {
+        flex: 1;
+        overflow: hidden;
+    }
+}

@@ -1,7 +1,7 @@
 spring:
   data:
     mongodb:
-      uri: mongodb+srv://diegocarbone22_db_user:HmCzwBHkzlj5l3Q2@main.hn1yisr.mongodb.net
+      uri: ${FLUX_DB}
       database: fluxenture_db
   application:
     name: core

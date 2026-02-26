@@ -5,3 +5,8 @@ spring:
       database: fluxenture_db
   application:
     name: core
+google:
+  drive:
+    client-id: ${GOOGLE_CLIENT_ID}
+    client-secret: ${GOOGLE_CLIENT_SECRET}
+    refresh-token: ${GOOGLE_REFRESH_TOKEN}

@@ -36,23 +36,30 @@ public class JwtService {
 
     //Extrae solo el USERNAME
     public String extractUsername(String token) {
-        return Jwts.parser()                 // Ya no existe parserBuilder()
-                .verifyWith((SecretKey) SECRET_KEY)      // Antes era setSigningKey()
-                .build()
-                .parseSignedClaims(token)    // Antes era parseClaimsJws()
-                .getPayload()                // Antes era getBody()
-                .getSubject();
+        try{
+            return Jwts.parser()                 // Ya no existe parserBuilder()
+                    .verifyWith((SecretKey) SECRET_KEY)      // Antes era setSigningKey()
+                    .build()
+                    .parseSignedClaims(token)    // Antes era parseClaimsJws()
+                    .getPayload()                // Antes era getBody()
+                    .getSubject();
+        }catch (Exception e){
+            return null;
+        }
+
     }
 
     //Extrae todos los DATOS
     public Claims extractAllClaims(String token) {
-        return Jwts.parser()
-                .verifyWith((SecretKey) SECRET_KEY)
-                .build()
-                .parseSignedClaims(token)
-                .getPayload();
-
-
+        try{
+            return Jwts.parser()
+                    .verifyWith((SecretKey) SECRET_KEY)
+                    .build()
+                    .parseSignedClaims(token)
+                    .getPayload();
+        }catch (Exception e){
+            return null;
+        }
     }
 
 

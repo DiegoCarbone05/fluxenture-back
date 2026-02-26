@@ -25,6 +25,16 @@ repositories {
 }
 
 dependencies {
+    implementation("com.github.librepdf:openpdf:1.3.30")
+    implementation("com.google.apis:google-api-services-sheets:v4-rev20230815-2.0.0")
+    // Google API Client
+    implementation("com.google.api-client:google-api-client:2.2.0")
+// Google Drive API
+    implementation("com.google.apis:google-api-services-drive:v3-rev20230822-2.0.0")
+// Google Auth Library
+    implementation("com.google.auth:google-auth-library-oauth2-http:1.19.0")
+// HTTP Transport (necesario para las llamadas API)
+    implementation("com.google.http-client:google-http-client-jackson2:1.43.3")
 	implementation("org.springframework.boot:spring-boot-starter-actuator")
 	implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
 	implementation("org.springframework.boot:spring-boot-starter-security")

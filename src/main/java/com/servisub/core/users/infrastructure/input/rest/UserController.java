@@ -2,14 +2,13 @@ package com.servisub.core.users.infrastructure.input.rest;
 
 import com.servisub.core.users.application.CreateUserUseCase;
 import com.servisub.core.users.application.LoginUseCase;
-import com.servisub.core.users.domain.LoginDTO;
 import com.servisub.core.users.domain.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/user")
 public class UserController {
 
     private final CreateUserUseCase createUserUseCase;

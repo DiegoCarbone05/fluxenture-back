@@ -1,4 +1,4 @@
-package com.servisub.core.users.domain;
+package com.servisub.core.users.domain.dto;
 
 import lombok.Data;
 

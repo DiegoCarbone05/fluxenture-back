@@ -13,6 +13,9 @@ concurrency:
 permissions:
   contents: read
 
+# Required GitHub variables:
+# - IMAGE_REPOSITORY (example: your-dockerhub-user/fluxenture-back)
+#
 # Required GitHub secrets:
 # - DOCKERHUB_USERNAME
 # - DOCKERHUB_TOKEN
@@ -22,7 +25,7 @@ permissions:
 # - GOOGLE_CLIENT_SECRET
 # - GOOGLE_REFRESH_TOKEN
 env:
-  IMAGE_REPOSITORY: ${{ secrets.DOCKERHUB_USERNAME }}/fluxenture-back
+  IMAGE_REPOSITORY: ${{ vars.IMAGE_REPOSITORY }}
   CONTAINER_NAME: fluxenture-back
   APP_PORT: "8080"
   CONTAINER_PORT: "8080"
@@ -72,7 +75,7 @@ jobs:
     runs-on: self-hosted
     needs: build_and_push
     env:
-      IMAGE_REF: ${{ needs.build_and_push.outputs.image_repository }}:${{ needs.build_and_push.outputs.image_sha_tag }}
+      IMAGE_REF: ${{ env.IMAGE_REPOSITORY }}
     steps:
       - name: Log in to Docker Hub
         run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin

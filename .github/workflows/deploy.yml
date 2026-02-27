@@ -25,7 +25,7 @@ permissions:
 # - GOOGLE_CLIENT_SECRET
 # - GOOGLE_REFRESH_TOKEN
 env:
-  IMAGE_REPOSITORY: ${{ vars.IMAGE_REPOSITORY }}
+  IMAGE_REPOSITORY: ${{ secrets.DOCKERHUB_USERNAME }}/fluxenture-back
   CONTAINER_NAME: fluxenture-back
   APP_PORT: "8080"
   CONTAINER_PORT: "8080"
@@ -34,9 +34,6 @@ jobs:
   build_and_push:
     name: Build and Push Image
     runs-on: ubuntu-latest
-    outputs:
-      image_repository: ${{ steps.image.outputs.repository }}
-      image_sha_tag: ${{ steps.image.outputs.sha_tag }}
     steps:
       - name: Checkout source
         uses: actions/checkout@v4
@@ -74,14 +71,12 @@ jobs:
     name: Deploy on EC2 Runner
     runs-on: self-hosted
     needs: build_and_push
-    env:
-      IMAGE_REF: ${{ env.IMAGE_REPOSITORY }}
     steps:
       - name: Log in to Docker Hub
         run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
 
-      - name: Pull latest commit image
-        run: docker pull "${IMAGE_REF}"
+      - name: Pull deployment image
+        run: docker pull ${IMAGE_REPOSITORY}:latest
 
       - name: Replace application container
         run: |
@@ -95,7 +90,7 @@ jobs:
             -e GOOGLE_CLIENT_ID="${{ secrets.GOOGLE_CLIENT_ID }}" \
             -e GOOGLE_CLIENT_SECRET="${{ secrets.GOOGLE_CLIENT_SECRET }}" \
             -e GOOGLE_REFRESH_TOKEN="${{ secrets.GOOGLE_REFRESH_TOKEN }}" \
-            "${IMAGE_REF}"
+            ${IMAGE_REPOSITORY}:latest
 
       - name: Cleanup unused images
         run: docker image prune -f

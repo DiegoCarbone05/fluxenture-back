@@ -1,6 +1,5 @@
 import { app, BrowserWindow, Menu, shell } from 'electron';
 import * as path from 'path';
-import * as isDev from 'electron-is-dev';
 
 console.log('Main.ts loaded - About to import events...');
 import './events/events';
@@ -14,17 +13,15 @@ function createWindow(): void {
   mainWindow = new BrowserWindow({
     width: 1200,
     height: 800,
+    show: false,
     darkTheme: false,
+    backgroundColor: '#ffffff',
     webPreferences: {
-      sandbox: false, //
       webSecurity: false,
       nodeIntegration: true,
       contextIsolation: false,
       backgroundThrottling: false,
-      devTools: true,
     },
-    icon: path.join(__dirname, '../dist/macrotool/favicon.ico'),
-    show: false,
     titleBarStyle: 'hidden',
     titleBarOverlay: {
       color: '#00000000',
@@ -33,21 +30,20 @@ function createWindow(): void {
     }
   });
 
+  mainWindow.maximize()
+  mainWindow.show()
+
   // Load the app
-  const startUrl = isDev 
+  const startUrl = true //true for development, false for production
     ? 'http://localhost:4200' 
-    : `file://${path.join(__dirname, '../dist/macrotool/index.html')}`;
+    : `file://${path.join(__dirname, '../fluxetnure/browser/index.html')}`;
   
+  console.log('startUrl', startUrl);
   mainWindow.loadURL(startUrl);
 
   // Show window when ready to prevent visual flash
   mainWindow.once('ready-to-show', () => {
     mainWindow.show();
-    
-    // Open DevTools in development
-    if (isDev) {
-      // mainWindow.webContents.openDevTools();
-    }
   });
 
   // Handle window closed

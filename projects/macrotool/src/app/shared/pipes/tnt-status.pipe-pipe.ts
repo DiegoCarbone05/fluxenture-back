@@ -1,6 +1,4 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { TrackAndTrace } from '../services/track-and-trace';
-import { Cd } from '../models/Cd.model';
 import { Tnt } from '../models/Tnt.model';
 
 @Pipe({
@@ -9,11 +7,9 @@ import { Tnt } from '../models/Tnt.model';
 })
 export class TntStatusPipePipe implements PipeTransform {
 
-  constructor(private trackAndTrace: TrackAndTrace){}
-
   async transform(value: Tnt[], ...args: unknown[]): Promise<unknown> {
     
-    const lastStatus = value[value.length - 1].status
+    const lastStatus = value[0].status
 
     if (lastStatus == "") {
       return 'No hay status';

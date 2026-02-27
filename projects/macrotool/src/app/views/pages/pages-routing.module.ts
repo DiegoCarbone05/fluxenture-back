@@ -3,26 +3,47 @@ import { RouterModule, Routes } from '@angular/router';
 import { Tnt } from './tnt/tnt';
 import { CdsViewer } from './tnt/cds-viewer/cds-viewer';
 import { Eployees } from './eployees/eployees';
+import { Pages } from './pages';
 
 const routes: Routes = [
   {
-    path: 'tnt',
-    component: Tnt,
+    path: 'app-pages',
+    component: Pages,
     children: [
       {
-        path: 'cds-viewer/:id',
-        component: CdsViewer
-      }
+        path: 'tnt',
+        component: Tnt,
+        children: [
+          {
+            path: 'cds-viewer/:id',
+            component: CdsViewer
+          }
+        ]
+      },
+      {
+        path: 'eployees',
+        component: Eployees
+      },
     ]
   },
-  {
-    path: 'eployees',
-    component: Eployees
-  },
-  {
-    path: 'cds-viewer/:id',
-    component: CdsViewer
-  }
+  // {
+  //   path: 'tnt',
+  //   component: Tnt,
+  //   children: [
+  //     {
+  //       path: 'cds-viewer/:id',
+  //       component: CdsViewer
+  //     }
+  //   ]
+  // },
+  // {
+  //   path: 'eployees',
+  //   component: Eployees
+  // },
+  // {
+  //   path: 'cds-viewer/:id',
+  //   component: CdsViewer
+  // }
 ];
 
 @NgModule({

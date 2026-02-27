@@ -1,9 +1,10 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Signal, signal } from '@angular/core';
 import { BaseApiService } from '../base-api.service';
 import { LoginDTO } from '../../../shared/models/LoginDTO';
 import { tap } from 'rxjs';
 import { UserDto } from '../../../shared/models/UserDto';
 import { catchError, map, Observable, of } from 'rxjs';
+import { Router } from '@angular/router';
 
 const TOKEN_KEY = 'flux_token';
 
@@ -16,9 +17,20 @@ export interface LoginResponse {
 })
 export class AuthService extends BaseApiService<LoginDTO> {
   protected override readonly endpoint = this.api + '/auth';
+  private user = signal<UserDto | null>(null);
 
-  constructor() {
+  constructor(private router: Router) {
     super();
+  }
+
+  getUserSignal(): Signal<UserDto | null> {
+    return this.user;
+  }
+
+  saveUserInSignal() {
+    this.getUser().subscribe(user => {
+      this.user.set(user);
+    });
   }
 
   login(credentials: LoginDTO) {
@@ -27,6 +39,12 @@ export class AuthService extends BaseApiService<LoginDTO> {
         localStorage.setItem(TOKEN_KEY, res.token);
       })
     );
+  }
+
+  logout() {
+    localStorage.removeItem(TOKEN_KEY);
+    window.location.reload();
+    this.user.set(null);
   }
 
   getUser(): Observable<UserDto> {

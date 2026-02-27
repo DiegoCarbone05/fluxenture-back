@@ -1,7 +1,7 @@
 export class UserDto {
     id?: string;
     email?: string;
-    name?: string;
+    username?: string;
 
     constructor(init?: Partial<UserDto>) {
         Object.assign(this, init);

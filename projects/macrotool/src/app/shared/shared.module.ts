@@ -20,7 +20,13 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSortModule } from '@angular/material/sort';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatSelectModule } from '@angular/material/select';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { TntStatusPipePipe } from './pipes/tnt-status.pipe-pipe';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { CdStatusChip } from './components/cd-status-chip/cd-status-chip';
+
 
 @NgModule({
   declarations: [
@@ -28,7 +34,8 @@ import { TntStatusPipePipe } from './pipes/tnt-status.pipe-pipe';
     Toolbar,
     StatusChip,
     Titlebar,
-    TntStatusPipePipe
+    TntStatusPipePipe,
+    CdStatusChip
   ],
   imports: [
     CommonModule,
@@ -50,6 +57,10 @@ import { TntStatusPipePipe } from './pipes/tnt-status.pipe-pipe';
     FormsModule,
     MatMenuModule,
     MatAutocompleteModule,
+    MatSelectModule,
+    MatCheckboxModule,
+    MatStepperModule,
+    MatDatepickerModule,
   ],
   exports: [
     Sidenav,
@@ -75,8 +86,12 @@ import { TntStatusPipePipe } from './pipes/tnt-status.pipe-pipe';
     FormsModule,
     MatMenuModule,
     MatAutocompleteModule,
-    TntStatusPipePipe
-
+    MatSelectModule,
+    MatCheckboxModule,
+    TntStatusPipePipe,
+    MatStepperModule,
+    MatDatepickerModule,
+    CdStatusChip,
   ]
 })
 export class SharedModule { }

@@ -4,8 +4,34 @@
 // Note: This intentionally avoids the Material 3 `mat.theme()` API.
 @include mat.core();
 
-$primary: mat.m2-define-palette(mat.$m2-indigo-palette);
-$accent: mat.m2-define-palette(mat.$m2-pink-palette, A200, A100, A400);
+// Custom palette based on #0468D7
+$fluxenture-primary-palette: (
+  50: #e8f4fd,
+  100: #c5e0fa,
+  200: #9fccf6,
+  300: #79b7f2,
+  400: #4a9eed,
+  500: #0468d7,
+  600: #035fc2,
+  700: #0355ad,
+  800: #024a98,
+  900: #013a7a,
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: rgba(black, 0.87),
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+  )
+);
+
+$primary: mat.m2-define-palette($fluxenture-primary-palette);
+$accent: mat.m2-define-palette($fluxenture-primary-palette, 200, 100, 400);
 $warn: mat.m2-define-palette(mat.$m2-red-palette);
 
 $macrotools-theme: mat.m2-define-light-theme((color: (primary: $primary,
@@ -17,6 +43,8 @@ $macrotools-theme: mat.m2-define-light-theme((color: (primary: $primary,
 
 @include mat.all-component-themes($macrotools-theme);
 
+// Brand color for use across the app
+$app-primary-color: #0468d7;
 $app-background-color: #ffffff;
 $app-text-color: #333333;
 $app-font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -40,6 +68,10 @@ body {
 html,
 body {
   height: 100%;
+}
+
+td {
+  font-size: 1rem;
 }
 
 // Material Symbols (MD3) configuration
@@ -136,6 +168,9 @@ mat-icon {
     'opsz' 24;
 }
 
+button{
+  border-radius: 55px !important;
+}
 
 mat-drawer {
   width: 30vw !important;

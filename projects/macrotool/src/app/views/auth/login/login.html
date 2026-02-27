@@ -1,7 +1,7 @@
 <div class="login-container">
     <form class="login-form" [formGroup]="form" (ngSubmit)="onSubmit()">
         <div class="header">
-            <img src="/assets/pictures/fluxenture_logo.svg" alt="logo" class="logo">
+            <img src="assets/pictures/fluxenture_logo.svg" alt="logo" class="logo">
             <p class="title">Iniciar sesión</p>
         </div>
 
@@ -13,7 +13,11 @@
             </mat-form-field>
             <mat-form-field appearance="outline">
                 <mat-label>Contraseña</mat-label>
-                <input matInput type="password" formControlName="password" />
+                <input matInput [type]="showPassword() ? 'text' : 'password'    " formControlName="password" />
+                <button type="button" matIconButton matSuffix (click)="togglePasswordVisibility()"
+                    [attr.aria-label]="'Hide password'" [attr.aria-pressed]="showPassword()">
+                    <mat-icon>{{showPassword() ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
             </mat-form-field>
         </div>
 
@@ -23,11 +27,11 @@
             <span>Email o contraseña incorrectos</span>
         </div>
         }
-        <button mat-flat-button type="submit" color="primary">Iniciar sesión</button>
+        <button class="login-button" mat-flat-button type="submit" color="primary">Iniciar sesión</button>
     </form>
 
 
     <p class="footer">
-        <span>2026 Fluxenture. Creado por industria Servaltek.</span>
+        <span>2026 Fluxenture. Creado por Servaltek.</span>
     </p>
 </div>

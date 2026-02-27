@@ -1,6 +1,8 @@
 {
   "name": "macrotools-app",
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "MacroTools - Desktop application for CD and employee management",
+  "author": "MacroTools",
   "main": "dist/electron/main.js",
   "scripts": {
     "ng": "ng",
@@ -11,8 +13,11 @@
     "electron": "electron .",
     "electron-dev": "concurrently \"npm run start\" \"wait-on http://localhost:4200 && electron .\"",
     "dev": "node dev.js",
-    "electron-build": "ng build --configuration production && electron-builder",
-    "electron-pack": "ng build --configuration production && electron-builder --dir",
+    "electron-build": "ng build macrotool --configuration=production --base-href ./ && npm run build-electron && electron-builder",
+    "electron-pack": "ng build macrotool --configuration=production --base-href ./ && npm run build-electron && electron-builder --dir",
+    "electron-win": "npm run electron-build -- --win",
+    "electron-mac": "npm run electron-build -- --mac",
+    "electron-linux": "npm run electron-build -- --linux",
     "build-electron": "tsc -p electron/tsconfig.json",
     "watch-electron": "tsc -p electron/tsconfig.json --watch",
     "postinstall": "electron-builder install-app-deps"
@@ -61,27 +66,5 @@
     "karma-jasmine-html-reporter": "~2.1.0",
     "typescript": "~5.8.2",
     "wait-on": "^9.0.1"
-  },
-  "build": {
-    "appId": "com.macrotools.app",
-    "productName": "MacroTools App",
-    "directories": {
-      "output": "dist-electron"
-    },
-    "files": [
-      "dist/macrotool/**/*",
-      "dist/electron/**/*",
-      "node_modules/**/*"
-    ],
-    "mac": {
-      "category": "public.app-category.productivity",
-      "target": "dmg"
-    },
-    "win": {
-      "target": "nsis"
-    },
-    "linux": {
-      "target": "AppImage"
-    }
   }
 }

@@ -13,14 +13,14 @@ export class Tnt {
 }
 
 export enum ETrackingStatus {
-    ADMITIDO,               // El correo recibió el paquete
-    EN_PROCESO_DE_CLASIFICACION, 
-    LLEGADA_A_CENTRO_LOGISTICO,
-    EN_CAMINO_A_SUCURSAL_DESTINO,
-    EN_PODER_DEL_CARTERO,   // Ya salió a reparto
-    INTENTO_DE_ENTREGA,     // Fue pero no encontró a nadie
-    DOMICILIO_CERRADO,
-    PLAZO_VENCIDO_NO_RECLAMADO,
-    ENTREGADO,              // Finalizado con éxito
-    DEVUELTO_AL_REMITENTE   // Algo salió mal
+    
+    //---------------------------------------------SUCCESS_STATUS
+    ENTREGADO = "ENTREGADO",         
+    ENTREGA_EN_SUCURSAL = "ENTREGA EN SUCURSAL",
+
+    //---------------------------------------------ERROR_STATUS
+    DOMICILIO_CERRADO_1 = "DOMICILIO CERRADO/1 VISITA",
+    DOMICILIO_CERRADO_2 = "DOMICILIO CERRADO/2 VISITA",
+    DEVUELTO_AL_REMITENTE = "DEVUELTO AL REMITENTE",
+    PLAZO_VENCIDO_NO_RECLAMADO = "PLAZO VENCIDO NO RECLAMADO",
 }

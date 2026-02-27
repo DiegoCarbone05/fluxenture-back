@@ -13,8 +13,6 @@ import { Router } from '@angular/router';
 })
 export class App{
 
-  constructor(private electron: Electron,  private authService: AuthService, private router: Router ) {
-
-  }
+  constructor(private electron: Electron,  private authService: AuthService, private router: Router ) {}
 
 }

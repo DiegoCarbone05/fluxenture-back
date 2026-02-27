@@ -18,10 +18,10 @@ export const authGuard: CanActivateFn = (route, state) => {
       // If valid and user is on auth area (e.g. splash), redirect to main/tnt to avoid loop
       const url = state.url.replace(/^\//, '');
       if (!url.startsWith('main')) {
-        router.navigate(['/main','tnt']);
+        router.navigate(['/main', 'app-pages', 'tnt']);
         return false;
       }
-      return true;
+      return true; // If valid and user is on main area, allow access
     })
   );
 };

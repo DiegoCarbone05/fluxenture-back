@@ -21,12 +21,14 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 
 import { SharedModule } from '../../shared/shared.module';
+import { Pages } from './pages';
 
 @NgModule({
   declarations: [
     Tnt,
     CdsViewer,
     Eployees,
+    Pages,
   ],
   imports: [
     CommonModule,

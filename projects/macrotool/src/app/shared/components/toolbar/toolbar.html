@@ -1,11 +1,28 @@
 <mat-toolbar class="toolbar-custom">
     <div class="toolbar-content">
-        <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon"
+        <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" *ngIf="menuButton"
             (click)="clickMenu()">
             <mat-icon>menu</mat-icon>
         </button>
+        <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" *ngIf="backButton"
+            (click)="clickBack()">
+            <mat-icon>arrow_back</mat-icon>
+        </button>
         <span>{{title}}</span>
     </div>
-    <ng-content></ng-content>
+    <div class="wrapper-content">
+        <ng-content></ng-content>
+
+        <button mat-button [matMenuTriggerFor]="menu">
+            <mat-icon>account_circle</mat-icon>
+            <span>Hola, <strong> {{user()?.username}}</strong></span>
+        </button>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="logout()">
+                <mat-icon>logout</mat-icon>
+                <span>Cerrar sesión</span>
+            </button>
+        </mat-menu>
+    </div>
 
 </mat-toolbar>

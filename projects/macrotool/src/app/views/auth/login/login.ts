@@ -15,7 +15,7 @@ import { Router } from '@angular/router';
 export class Login {
 
   errMsg = signal<boolean>(false);
-
+  showPassword = signal<boolean>(false);
   onError() {
     this.errMsg.set(true);
     setTimeout(() => {
@@ -36,6 +36,10 @@ export class Login {
     this.viewsService.setTitlebarFullscreen(true);
   }
 
+  togglePasswordVisibility() {
+    this.showPassword.set(!this.showPassword());
+  }
+
   onSubmit() {
     const mail = this.form.value.email as string;
     const password = this.form.value.password as string;
@@ -43,7 +47,7 @@ export class Login {
       const creds = new LoginDTO({ mail, password });
       this.authService.login(creds).subscribe({
         next: () => {
-          this.router.navigate(['/main', 'tnt']);
+          this.router.navigate(['/main', "app-pages", 'tnt']);
           this.viewsService.setTitlebarFullscreen(false);
         },
         error: () => {

@@ -13,12 +13,10 @@ const routes: Routes = [
       {
         path: 'tnt',
         component: Tnt,
-        children: [
-          {
-            path: 'cds-viewer/:id',
-            component: CdsViewer
-          }
-        ]
+      },
+      {
+        path: 'tnt/cds-viewer/:id',
+        component: CdsViewer
       },
       {
         path: 'eployees',
@@ -50,4 +48,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class PagesRoutingModule {}
+export class PagesRoutingModule { }

@@ -8,7 +8,11 @@ import { Tnt } from '../models/Tnt.model';
 export class TntStatusPipePipe implements PipeTransform {
 
   async transform(value: Tnt[], ...args: unknown[]): Promise<unknown> {
-    
+
+    if (!value) {
+      return 'No hay status';
+    }
+
     const lastStatus = value[0].status
 
     if (lastStatus == "") {

@@ -51,13 +51,17 @@ export class Tnt implements AfterViewInit {
 
     effect(() => {
       const cds = this.cdsSignal();
-      this.dataSource.data = cds;
+      this.dataSource.data = [...cds].sort((a, b) =>
+        new Date(b.emissionDate).getTime() - new Date(a.emissionDate).getTime()
+      );
     });
   }
 
 
   openCdsViewer(element: Cd) {
-    this.router.navigate(['/main', 'cds-viewer', element.trackingNumber]);
+    console.log("cornudo");
+
+    this.router.navigate(['/main', "app-pages", 'tnt', 'cds-viewer', element.trackingNumber]);
   }
 
   deleteCd(cd: Cd) {

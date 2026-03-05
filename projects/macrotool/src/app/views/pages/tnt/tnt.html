@@ -11,7 +11,7 @@
     <mat-drawer-content class="app-content">
         <br>
         <div class="table-container">
-            <table mat-table [dataSource]="dataSource" matSort matSortActive="emission_date" matSortStart="desc" class="tabla-custom-hover">
+            <table mat-table [dataSource]="dataSource" matSort matSortActive="emission_date" class="tabla-custom-hover">
                 <ng-container matColumnDef="follow_number">
                     <th mat-header-cell *matHeaderCellDef>Numero de seguimiento</th>
                     <td mat-cell *matCellDef="let element" (click)="openCdsViewer(element)">{{ element.trackingNumber }}
@@ -21,11 +21,13 @@
                 <ng-container matColumnDef="name">
                     <th mat-header-cell *matHeaderCellDef>Name</th>
                     <td mat-cell *matCellDef="let element" (click)="openCdsViewer(element)"><strong>{{
-                        returnEmployeeName(element.employeeId) }}</strong><td>
+                            returnEmployeeName(element.employeeId) }}</strong>
+                    <td>
                 </ng-container>
                 <ng-container matColumnDef="emission_date">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha de emisión</th>
-                    <td mat-cell *matCellDef="let element" (click)="openCdsViewer(element)">{{ element.emissionDate | date: 'dd/MM/yy' }}
+                    <td mat-cell *matCellDef="let element" (click)="openCdsViewer(element)">{{ element.emissionDate |
+                        date: 'dd/MM/yy' }}
                     </td>
                 </ng-container>
 
@@ -56,8 +58,9 @@
                         <button matButton="text" (click)="deleteCd(element)">Eliminar</button>
                     </td>
                 </ng-container>
-                <tr  mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                <tr [class.finalized]="row.trackingCompleted" mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr [class.finalized]="row.trackingCompleted" mat-row *matRowDef="let row; columns: displayedColumns">
+                </tr>
             </table>
         </div>
     </mat-drawer-content>

@@ -34,10 +34,10 @@ function createWindow(): void {
   mainWindow.show()
 
   // Load the app
-  const startUrl = true //true for development, false for production
-    ? 'http://localhost:4200' 
+  const startUrl = false //true for development, false for production
+    ? 'http://localhost:4200'
     : `file://${path.join(__dirname, '../fluxetnure/browser/index.html')}`;
-  
+
   console.log('startUrl', startUrl);
   mainWindow.loadURL(startUrl);
 

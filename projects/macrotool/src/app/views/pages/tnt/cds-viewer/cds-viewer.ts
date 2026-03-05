@@ -74,7 +74,7 @@ export class CdsViewer {
         this.trackAndTrace.trackPackage(trackingNumber as string).then((res) => {
           const tnt: Tnt[] = res as unknown as Tnt[];
           this.loadTracking(tnt)
-          
+
         })
       }
 
@@ -125,7 +125,7 @@ export class CdsViewer {
   }
 
   goBack() {
-    this.router.navigate(['/main', 'tnt']);
+    this.router.navigate(['/main', 'app-pages', 'tnt']);
   }
 
 

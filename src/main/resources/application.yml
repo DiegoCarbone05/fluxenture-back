@@ -1,7 +1,9 @@
 server:
   port: ${PORT:8080} # Railway inyecta el puerto acá
-
 spring:
+  threads:
+    virtual:
+      enabled: true
   data:
     mongodb:
       uri: ${FLUX_DB}

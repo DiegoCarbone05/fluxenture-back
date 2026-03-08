@@ -18,13 +18,11 @@ public class DriveStorageInitializer {
         try {
             // Llamamos a tu lógica específica de Cartas Documento
             // Esto asegura que /cd_trackings/2026/ exista antes de que alguien entre al front
-            String cdFolderId = driveStructureManager.createFolders(DriveConstants.ROOT_CD);
+
+            // Params (Category, EnableAutoYearFolder, EnableAutoMonthFolder)
+            String cdFolderId = driveStructureManager.createFolders(DriveConstants.ROOT_CD, true, false);
             System.out.println(">> [Drive] Estructura de CDs OK. ID: " + cdFolderId);
-
-            String vacationsFolderId = driveStructureManager.createFolders(DriveConstants.ROOT_VACATIONS);
-            System.out.println(">> [Drive] Estructura de VACATIONS OK. ID: " + vacationsFolderId);
-
-            String newFeaturesFolderId = driveStructureManager.createFolders(DriveConstants.ROOT_NEW_FEATURES);
+            String newFeaturesFolderId = driveStructureManager.createFolders(DriveConstants.LPO,  false, false);
             System.out.println(">> [Drive] Estructura de CDs OK. NEW FEATURES: " + newFeaturesFolderId);
 
 

@@ -14,12 +14,4 @@ public class CoreApplication {
 		SpringApplication.run(CoreApplication.class, args);
 	}
 
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-                .authorizeHttpRequests(auth -> auth.anyRequest().permitAll())
-                .csrf(AbstractHttpConfigurer::disable);
-        return http.build();
-    }
-
 }

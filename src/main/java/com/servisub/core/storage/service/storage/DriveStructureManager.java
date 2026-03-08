@@ -19,17 +19,27 @@ public class DriveStructureManager {
     private String rootFolderId;
 
 
-    public String createFolders(String driveConstants) {
-        return createVacationsFolders(driveConstants);
+    public String createFolders(String driveConstants, Boolean autoYear, Boolean autoMonth) {
+        return createVacationsFolders(driveConstants, autoYear, autoMonth);
     }
 
-    private String createVacationsFolders(String category) {
+    private String createVacationsFolders(String category, Boolean autoYear, Boolean autoMonth) {
         try {
             // 1. Calculamos el año actual
-            String currentYear = String.valueOf(LocalDate.now().getYear());
+            String currentYear = null;
+            String currentMonth = null;
 
-            String yearFolderId = driveService.getOrCreatePath(category + currentYear);
-            System.out.println("Estructura "+ category +" verificada para el año: " + currentYear);
+            if (autoYear) {
+                currentYear = String.valueOf(LocalDate.now().getYear());
+
+            }
+            if (autoMonth) {
+                currentMonth = String.valueOf(LocalDate.now().getMonth());
+            }
+
+
+            String yearFolderId = driveService.getOrCreatePath(category + currentYear + currentMonth);
+            System.out.println("Estructura "+ category +" verificada para el año: " + currentYear + currentMonth);
             return yearFolderId;
 
         } catch (IOException e) {

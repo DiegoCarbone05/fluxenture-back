@@ -6,11 +6,16 @@ import com.google.api.services.drive.Drive;
 import com.google.api.services.drive.model.File;
 import com.google.api.services.drive.model.FileList;
 import com.servisub.core.employees.domain.ResponseDTO;
+import com.servisub.core.storage.domain.StorageFile;
 import jakarta.annotation.PostConstruct;
 import org.apache.tomcat.jni.FileInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -182,6 +187,35 @@ public class GoogleDriveService implements StorageService {
     public InputStream downloadFile(String fileId) throws IOException {
         System.out.println("Bajando archivo de Drive ID: " + fileId);
         return driveService.files().get(fileId).executeMediaAsInputStream();
+    }
+
+    @Override
+    public StorageFile downloadFileById(String fileId) throws IOException {
+        System.out.println("Bajando archivo de Drive ID (con metadata): " + fileId);
+        File driveFile = driveService.files().get(fileId).setFields("name, mimeType").execute();
+        InputStream inputStream = driveService.files().get(fileId).executeMediaAsInputStream();
+
+        return StorageFile.builder()
+                .inputStream(inputStream)
+                .name(driveFile.getName())
+                .mimeType(driveFile.getMimeType())
+                .build();
+    }
+
+    @Override
+    public ResponseEntity<Resource> downloadFileResponse(String fileId) {
+        try {
+            StorageFile storageFile = downloadFileById(fileId);
+            InputStreamResource resource = new InputStreamResource(storageFile.getInputStream());
+
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + storageFile.getName() + "\"")
+                    .contentType(MediaType.parseMediaType(storageFile.getMimeType()))
+                    .body(resource);
+        } catch (IOException e) {
+            System.err.println("Error al descargar archivo de Drive: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 }
 

@@ -1,7 +1,9 @@
 package com.servisub.core.storage.service.storage;
 
 import com.servisub.core.employees.domain.ResponseDTO;
+import com.servisub.core.storage.domain.StorageFile;
 import org.apache.tomcat.jni.FileInfo;
+import org.springframework.core.io.Resource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -16,4 +18,6 @@ public interface StorageService {
     ResponseEntity<?> deleteFile(String fileId);
     ResponseEntity<ResponseDTO> updateFile(String fileId, byte[] contentBytes, String contentType) throws IOException;
     InputStream downloadFile(String fileId) throws IOException;
+    StorageFile downloadFileById(String fileId) throws IOException;
+    ResponseEntity<Resource> downloadFileResponse(String fileId);
 }

@@ -2,13 +2,20 @@ package com.servisub.core.storage.controller;
 
 import com.servisub.core.employees.domain.ResponseDTO;
 import com.servisub.core.storage.domain.CreateFolderDTO;
+import com.servisub.core.storage.domain.StorageFile;
 import com.servisub.core.storage.domain.UploadFileDTO;
 import com.servisub.core.storage.service.storage.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 // Controller
 @RestController
@@ -27,6 +34,12 @@ public class FileController {
     public ResponseEntity<?> delete(@PathVariable String id) {
         return storageService.deleteFile(id);
     }
+
+    @GetMapping("/download/{fileId}")
+    public ResponseEntity<Resource> download(@PathVariable String fileId) {
+        return storageService.downloadFileResponse(fileId);
+    }
+
 
     @PostMapping("/create-folder")
     public ResponseEntity<String> createFolder(@RequestBody CreateFolderDTO folderDTO) {

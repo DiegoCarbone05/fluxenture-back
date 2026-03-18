@@ -40,7 +40,6 @@ public class FileController {
         return storageService.downloadFileResponse(fileId);
     }
 
-
     @PostMapping("/create-folder")
     public ResponseEntity<String> createFolder(@RequestBody CreateFolderDTO folderDTO) {
         storageService.createFolder(folderDTO.getFolderName(), folderDTO.getParentFolderId());

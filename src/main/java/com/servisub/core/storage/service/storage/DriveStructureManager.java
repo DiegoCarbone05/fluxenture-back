@@ -20,18 +20,24 @@ public class DriveStructureManager {
 
 
     public String createFolders(String driveConstants, Boolean autoYear, Boolean autoMonth) {
-        return createVacationsFolders(driveConstants, autoYear, autoMonth);
+        return folderCreator(driveConstants, autoYear, autoMonth);
     }
 
-    private String createVacationsFolders(String category, Boolean autoYear, Boolean autoMonth) {
+    /**
+     * Funcion intelgente para crear carpetas teniendo en cuenta años y meses y asegurando que no se dupliquen
+     * @param category
+     * @param autoYear
+     * @param autoMonth
+     * @return
+     */
+    private String folderCreator(String category, Boolean autoYear, Boolean autoMonth) {
         try {
             // 1. Calculamos el año actual
-            String currentYear = null;
-            String currentMonth = null;
+            String currentYear = "";
+            String currentMonth = "";
 
             if (autoYear) {
                 currentYear = String.valueOf(LocalDate.now().getYear());
-
             }
             if (autoMonth) {
                 currentMonth = String.valueOf(LocalDate.now().getMonth());

@@ -22,8 +22,8 @@ public class DriveStorageInitializer {
             // Params (Category, EnableAutoYearFolder, EnableAutoMonthFolder)
             String cdFolderId = driveStructureManager.createFolders(DriveConstants.ROOT_CD, true, false);
             System.out.println(">> [Drive] Estructura de CDs OK. ID: " + cdFolderId);
-            String newFeaturesFolderId = driveStructureManager.createFolders(DriveConstants.LPO,  false, false);
-            System.out.println(">> [Drive] Estructura de CDs OK. NEW FEATURES: " + newFeaturesFolderId);
+            String lpoFolderId = driveStructureManager.createFolders(DriveConstants.LPO,  false, false);
+            System.out.println(">> [Drive] Estructura de LPO OK. ID: " + lpoFolderId);
 
 
             // Si el día de mañana agregás Vacaciones, llamarías acá a:

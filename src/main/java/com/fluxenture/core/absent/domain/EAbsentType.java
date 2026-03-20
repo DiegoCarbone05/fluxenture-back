@@ -6,6 +6,7 @@ public enum EAbsentType {
     LICENSE,
     UNJUSTIFIED,
     SUSPENSION,
+    CERTIFICATE,
     OTHER,
     FT,
     DT,

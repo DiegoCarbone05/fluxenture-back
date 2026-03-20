@@ -4,9 +4,9 @@ plugins {
 	id("io.spring.dependency-management") version "1.1.7"
 }
 
-group = "com.servisub"
+group = "com.fluxenture"
 version = "0.0.1-SNAPSHOT"
-description = "Servidor administrativo de Servisub"
+description = "Servidor administrativo de Fluxenture"
 
 java {
 	toolchain {

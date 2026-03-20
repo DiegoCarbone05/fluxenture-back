@@ -1,0 +1,14 @@
+package com.fluxenture.core.shared.infrastructure.exception;
+
+import lombok.Builder;
+import lombok.Data;
+import java.time.LocalDateTime;
+
+@Data
+@Builder
+public class ApiError {
+    private String message;
+    private String error;
+    private int status;
+    private LocalDateTime timestamp;
+}

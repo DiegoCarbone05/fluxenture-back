@@ -13,11 +13,7 @@ public class DeleteDocUseCase {
     }
 
     public ResponseEntity<Void> execute(String id) {
-        try {
-            docRepository.delete(id);
-            return ResponseEntity.noContent().build();
-        } catch (Exception e) {
-            return ResponseEntity.internalServerError().build();
-        }
+        docRepository.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }

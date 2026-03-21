@@ -7,9 +7,15 @@ public enum EDocType {
     CONTRATO, 
     PREOCUPACIONAL,
     VACATIONS,
-    MEDIC_CERRT,
     LICENCE,
     APERCIBIMIENTO,
-    OTROS
+    CERTIFICATE,
+    SUSPENSION,
+    OTHER,
+    FT,
+    DT,
+    DG,
+    PG,
+    CD
 }
 

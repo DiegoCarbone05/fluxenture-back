@@ -15,11 +15,7 @@ public class GetDocsByEmployeeUseCase {
     }
 
     public ResponseEntity<List<Doc>> execute(String employeeId) {
-        try {
-            List<Doc> docs = docRepository.findByEmployeeId(employeeId);
-            return ResponseEntity.ok(docs);
-        } catch (Exception e) {
-            return ResponseEntity.internalServerError().build();
-        }
+        List<Doc> docs = docRepository.findByEmployeeId(employeeId);
+        return ResponseEntity.ok(docs);
     }
 }

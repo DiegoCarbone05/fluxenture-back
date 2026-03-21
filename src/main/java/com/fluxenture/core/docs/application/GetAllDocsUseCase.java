@@ -15,12 +15,7 @@ public class GetAllDocsUseCase {
     private DocRepository repository;
 
     public ResponseEntity<List<Doc>> execute(){
-        try
-        {
-            List<Doc> docs = repository.getAll();
-            return ResponseEntity.ok(docs);
-        }catch(Exception ex){
-            return ResponseEntity.badRequest().build();
-        }
+        List<Doc> docs = repository.getAll();
+        return ResponseEntity.ok(docs);
     }
 }

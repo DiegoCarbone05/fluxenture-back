@@ -14,5 +14,6 @@ public enum EAbsentType {
     PG,
     DESPIDO,
     RENUNCIA,
-    FERIADO
+    FERIADO,
+    ART
 }

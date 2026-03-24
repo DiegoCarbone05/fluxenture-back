@@ -20,6 +20,7 @@ public class AbsentResponseDTO {
     private LocalDate originalStartDate;
     private LocalDate originalEndDate;
     private int impactDaysInMonth;
+    private String observations;
 
     // Constructor que el compilador está pidiendo
     public AbsentResponseDTO(Absent absent, int impactDaysInMonth) {
@@ -31,6 +32,7 @@ public class AbsentResponseDTO {
         this.originalStartDate = absent.getStartDate();
         this.originalEndDate = absent.getEndDate();
         this.impactDaysInMonth = impactDaysInMonth;
+        this.observations = absent.getObservations();
     }
 
 }

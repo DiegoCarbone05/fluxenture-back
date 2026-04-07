@@ -17,4 +17,5 @@ public class DocEntity {
     private String driveFileId;
     private String uploadDate;
     private String description;
+    private String user;
 }

@@ -16,8 +16,8 @@ public class SaveEmployeeUseCase {
 
     public ResponseEntity<Employe> execute(Employe employe) {
         try{
-            employeeRepository.save(employe);
-            return ResponseEntity.ok(employe);
+            Employe savedEmploye = employeeRepository.save(employe);
+            return ResponseEntity.ok(savedEmploye);
         }catch(Exception ex){
             return ResponseEntity.badRequest().build();
         }

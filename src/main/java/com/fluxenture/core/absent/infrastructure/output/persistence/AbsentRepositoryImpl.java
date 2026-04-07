@@ -58,7 +58,6 @@ public class AbsentRepositoryImpl implements AbsentRepository {
                 .map(mapper::toDomain)
                 .toList();
 
-        System.out.println(results);
 
         // 2. Aplicamos el "recorte" para cada uno
         return results.stream().map(absent -> {

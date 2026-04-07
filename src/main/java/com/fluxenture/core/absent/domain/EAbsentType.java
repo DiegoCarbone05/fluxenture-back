@@ -2,9 +2,8 @@ package com.fluxenture.core.absent.domain;
 
 public enum EAbsentType {
     VACATIONS,
-    MEDICAL,
+    MEDICAL_CERTIFICATE,
     LICENSE,
-    UNJUSTIFIED,
     SUSPENSION,
     CERTIFICATE,
     OTHER,

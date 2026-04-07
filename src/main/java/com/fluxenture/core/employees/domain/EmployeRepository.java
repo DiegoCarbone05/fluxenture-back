@@ -5,7 +5,7 @@ import org.springframework.http.ResponseEntity;
 import java.util.List;
 
 public interface EmployeRepository {
-    void save(Employe employe);
+    Employe save(Employe employe);
     void update();
     List<Employe> getAllEmployees();
     ResponseEntity<ResponseDTO> loadAllEmployees(List<Employe> employees);

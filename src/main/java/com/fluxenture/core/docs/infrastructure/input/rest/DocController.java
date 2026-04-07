@@ -5,6 +5,7 @@ import com.fluxenture.core.docs.application.GetAllDocsUseCase;
 import com.fluxenture.core.docs.application.GetDocsByEmployeeUseCase;
 import com.fluxenture.core.docs.application.SaveDocUseCase;
 import com.fluxenture.core.docs.domain.Doc;
+import com.fluxenture.core.storage.service.storage.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +22,9 @@ public class DocController {
     @Autowired
     private DeleteDocUseCase deleteDocUseCase;
     @Autowired
-    private GetAllDocsUseCase getAllDocsUseCase     ;
+    private GetAllDocsUseCase getAllDocsUseCase;
+    @Autowired
+    private StorageService storageService;
 
 
     @GetMapping("/")
@@ -33,6 +36,13 @@ public class DocController {
     public ResponseEntity<Doc> save(@RequestBody Doc doc) {
         System.out.println(doc.toString());
         return saveDocUseCase.execute(doc);
+    }
+
+    @DeleteMapping("/{id}/{fileId}")
+    public ResponseEntity<Void> deleteFileAndDoc(@PathVariable("id") String id, @PathVariable("fileId") String fileId) {
+        deleteDocUseCase.execute(id);
+        storageService.deleteFile(fileId);
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping("/employee/{employeeId}")

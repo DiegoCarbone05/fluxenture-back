@@ -15,7 +15,7 @@ public class SaveDocUseCase {
 
     public ResponseEntity<Doc> execute(Doc doc) {
         System.out.println("PROCESSING DOCS USCASE - SAVE DOC");
-        docRepository.save(doc);
-        return ResponseEntity.ok(doc);
+        Doc savedDoc = docRepository.save(doc);
+        return ResponseEntity.ok(savedDoc);
     }
 }

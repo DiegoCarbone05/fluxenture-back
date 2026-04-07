@@ -28,9 +28,10 @@ public class EmployeRepositoryImpl implements EmployeRepository {
 
 
     @Override
-    public void save(Employe employe) {
+    public Employe save(Employe employe) {
         EmployeeEntity entity = EmployeeMapper.toEntity(employe);
-        mongoTemplate.save(entity);
+        EmployeeEntity savedEntity = mongoTemplate.save(entity);
+        return EmployeeMapper.toDomain(savedEntity);
     }
 
     @Override

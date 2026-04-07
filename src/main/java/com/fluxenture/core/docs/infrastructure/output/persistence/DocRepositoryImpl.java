@@ -21,9 +21,10 @@ public class DocRepositoryImpl implements DocRepository {
     }
 
     @Override
-    public void save(Doc doc) {
+    public Doc save(Doc doc) {
         DocEntity entity = DocMapper.toEntity(doc);
-        mongoTemplate.save(entity);
+        DocEntity savedEntity = mongoTemplate.save(entity);
+        return DocMapper.toDomain(savedEntity);
     }
 
     @Override

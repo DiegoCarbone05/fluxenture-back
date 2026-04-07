@@ -12,6 +12,7 @@ public class DocMapper {
         entity.setDriveFileId(domain.getDriveFileId());
         entity.setUploadDate(domain.getUploadDate());
         entity.setDescription(domain.getDescription());
+        entity.setUser(domain.getUser());
         return entity;
     }
 
@@ -23,6 +24,7 @@ public class DocMapper {
         domain.setDriveFileId(entity.getDriveFileId());
         domain.setUploadDate(entity.getUploadDate());
         domain.setDescription(entity.getDescription());
+        domain.setUser(entity.getUser());
         return domain;
     }
 }

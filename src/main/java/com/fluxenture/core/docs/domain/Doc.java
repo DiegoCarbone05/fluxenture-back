@@ -17,4 +17,6 @@ public class Doc {
     private String uploadDate;
     @Nullable
     private String description;
+    @Nullable
+    private String user;
 }

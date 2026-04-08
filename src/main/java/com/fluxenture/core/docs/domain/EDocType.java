@@ -14,8 +14,6 @@ public enum EDocType {
     SUSPENSION,
     OTHER,
     ART,
-    FT,
-    DT,
     DG,
     PG,
     CD

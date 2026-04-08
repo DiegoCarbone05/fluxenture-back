@@ -7,4 +7,5 @@ public interface DocRepository {
     List<Doc> findByEmployeeId(String employeeId);
     List<Doc> getAll();
     void delete(String id);
+    Doc findById(String id);
 }

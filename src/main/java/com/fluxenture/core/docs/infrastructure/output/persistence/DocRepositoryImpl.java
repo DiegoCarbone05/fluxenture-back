@@ -45,4 +45,10 @@ public class DocRepositoryImpl implements DocRepository {
         Query query = new Query(Criteria.where("id").is(id));
         mongoTemplate.remove(query, DocEntity.class);
     }
+
+    @Override
+    public Doc findById(String id) {
+        DocEntity entity = mongoTemplate.findById(id, DocEntity.class);
+        return entity != null ? DocMapper.toDomain(entity) : null;
+    }
 }

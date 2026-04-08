@@ -1,9 +1,6 @@
 package com.fluxenture.core.docs.infrastructure.input.rest;
 
-import com.fluxenture.core.docs.application.DeleteDocUseCase;
-import com.fluxenture.core.docs.application.GetAllDocsUseCase;
-import com.fluxenture.core.docs.application.GetDocsByEmployeeUseCase;
-import com.fluxenture.core.docs.application.SaveDocUseCase;
+import com.fluxenture.core.docs.application.*;
 import com.fluxenture.core.docs.domain.Doc;
 import com.fluxenture.core.storage.service.storage.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,11 +22,18 @@ public class DocController {
     private GetAllDocsUseCase getAllDocsUseCase;
     @Autowired
     private StorageService storageService;
+    @Autowired
+    private GetDocByIdUseCase getDocByIdUseCase;
 
 
     @GetMapping("/")
     public ResponseEntity<List<Doc>> getAllDocs() {
         return getAllDocsUseCase.execute();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Doc> getDocById(@PathVariable String id) {
+        return getDocByIdUseCase.execute(id);
     }
 
     @PostMapping("/")

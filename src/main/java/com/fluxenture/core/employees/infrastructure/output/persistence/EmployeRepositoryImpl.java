@@ -13,7 +13,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -69,11 +68,13 @@ public class EmployeRepositoryImpl implements EmployeRepository {
                 .toList(); // Esto crea la List<Employee> final
     }
 
+    @Override
+    public Employe getById(String id) {
+        EmployeeEntity entity = mongoTemplate.findById(id, EmployeeEntity.class);
+        return entity != null ? EmployeeMapper.toDomain(entity) : null;
+    }
 
     @Override
     public void getEmploye() {
-
     }
-
-
-}
+    }

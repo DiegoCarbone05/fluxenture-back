@@ -2,6 +2,7 @@ package com.fluxenture.core.employees.infrastructure.input.rest;
 
 import com.fluxenture.core.employees.application.DeleteEmployeeUseCase;
 import com.fluxenture.core.employees.application.GetAllEmployeesUseCase;
+import com.fluxenture.core.employees.application.GetEmployeeByIdUseCase;
 import com.fluxenture.core.employees.application.LoadAllEmployeesUseCase;
 import com.fluxenture.core.employees.application.SaveEmployeeUseCase;
 import com.fluxenture.core.employees.domain.Employe;
@@ -20,13 +21,16 @@ public class EmployeController {
     private final DeleteEmployeeUseCase deleteEmployeeUseCase;
     private final GetAllEmployeesUseCase getAllEmployeesUseCase;
     private final LoadAllEmployeesUseCase loadAllEmployeesUseCase;
+    private final GetEmployeeByIdUseCase getEmployeeByIdUseCase;
 
-    public EmployeController(SaveEmployeeUseCase saveEmployeeUseCase, DeleteEmployeeUseCase deleteEmployeeUseCase, GetAllEmployeesUseCase getAllEmployeesUseCase, LoadAllEmployeesUseCase loadAllEmployeesUseCase) {
+    public EmployeController(SaveEmployeeUseCase saveEmployeeUseCase, DeleteEmployeeUseCase deleteEmployeeUseCase, GetAllEmployeesUseCase getAllEmployeesUseCase, LoadAllEmployeesUseCase loadAllEmployeesUseCase, GetEmployeeByIdUseCase getEmployeeByIdUseCase) {
         this.saveEmployeeUseCase = saveEmployeeUseCase;
         this.deleteEmployeeUseCase = deleteEmployeeUseCase;
         this.getAllEmployeesUseCase = getAllEmployeesUseCase;
         this.loadAllEmployeesUseCase = loadAllEmployeesUseCase;
+        this.getEmployeeByIdUseCase = getEmployeeByIdUseCase;
     }
+
 
 
     @PostMapping("/")
@@ -42,6 +46,11 @@ public class EmployeController {
     @GetMapping("/")
     public ResponseEntity<List<Employe>> getAll() {
         return getAllEmployeesUseCase.execute();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Employe> getById(@PathVariable String id) {
+        return getEmployeeByIdUseCase.execute(id);
     }
 
     @PutMapping("/{id}")

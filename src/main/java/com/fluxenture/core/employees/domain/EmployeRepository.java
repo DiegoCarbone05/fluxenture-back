@@ -11,4 +11,5 @@ public interface EmployeRepository {
     ResponseEntity<ResponseDTO> loadAllEmployees(List<Employe> employees);
     void delete(String id);
     void getEmploye();
+    Employe getById(String id);
 }

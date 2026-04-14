@@ -16,6 +16,10 @@ public enum EDocType {
     ART,
     DG,
     PG,
-    CD
+    CD,
+    RECEIPT,
+    INCOME,
+    BAJA_AFIP,
+    NOTIFICATION
 }
 

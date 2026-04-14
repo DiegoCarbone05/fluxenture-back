@@ -1,0 +1,23 @@
+package com.fluxenture.core.employeehistory.application;
+
+import com.fluxenture.core.employeehistory.domain.EmployeeHistory;
+import com.fluxenture.core.employeehistory.infrastructure.output.persistence.entity.EmployeeHistoryRepository;
+import com.fluxenture.core.employeehistory.infrastructure.output.persistence.mapper.EmployeeHistoryMapper;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+@Component
+@RequiredArgsConstructor
+public class GetEmployeeHistoryByEmployeeNameUseCase {
+
+    private final EmployeeHistoryRepository repository;
+
+    public List<EmployeeHistory> execute(String employeeName) {
+        return repository.findByEmployeeName(employeeName).stream()
+                .map(EmployeeHistoryMapper::toDomain)
+                .collect(Collectors.toList());
+    }
+}

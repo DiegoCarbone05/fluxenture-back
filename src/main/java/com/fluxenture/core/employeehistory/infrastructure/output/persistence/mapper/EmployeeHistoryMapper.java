@@ -16,6 +16,7 @@ public class EmployeeHistoryMapper {
                 .employeeName(domain.getEmployeeName())
                 .description(domain.getDescription())
                 .docId(domain.getDocId())
+                .audit(domain.getAudit())
                 .build();
     }
 
@@ -30,6 +31,7 @@ public class EmployeeHistoryMapper {
                 .employeeName(entity.getEmployeeName())
                 .description(entity.getDescription())
                 .docId(entity.getDocId())
+                .audit(entity.getAudit())
                 .build();
     }
 }

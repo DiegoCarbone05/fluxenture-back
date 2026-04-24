@@ -2,6 +2,7 @@ package com.fluxenture.core.docs.infrastructure.output.persistence.entity;
 
 import com.mongodb.lang.Nullable;
 import com.fluxenture.core.docs.domain.EDocType;
+import com.fluxenture.core.shared.domain.AuditMetadata;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -17,5 +18,5 @@ public class DocEntity {
     private String driveFileId;
     private String uploadDate;
     private String description;
-    private String user;
+    private AuditMetadata audit;
 }

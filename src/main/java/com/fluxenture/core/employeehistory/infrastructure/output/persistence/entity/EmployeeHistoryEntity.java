@@ -1,5 +1,6 @@
 package com.fluxenture.core.employeehistory.infrastructure.output.persistence.entity;
 
+import com.fluxenture.core.shared.domain.AuditMetadata;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,4 +22,5 @@ public class EmployeeHistoryEntity {
     private String employeeName;
     private String description;
     private String docId;
+    private AuditMetadata audit;
 }

@@ -13,18 +13,22 @@ public class UserMapper {
         entity.setUsername(domain.getUsername());
         entity.setPassword(domain.getPassword());
         entity.setMail(domain.getMail());
+        entity.setRole(domain.getRole());
+        entity.setAudit(domain.getAudit());
         return entity;
     }
 
     public static User toDomain(UserEntity entity) {
         if (entity == null) return null;
 
-        return new User(
-                entity.getId(),
-                entity.getMail(),
-                entity.getUsername(),
-                entity.getPassword()
-        );
+        return User.builder()
+                .id(entity.getId())
+                .mail(entity.getMail())
+                .username(entity.getUsername())
+                .password(entity.getPassword())
+                .role(entity.getRole())
+                .audit(entity.getAudit())
+                .build();
     }
 
 }

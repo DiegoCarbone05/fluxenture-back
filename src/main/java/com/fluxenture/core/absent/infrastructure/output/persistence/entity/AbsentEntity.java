@@ -1,6 +1,7 @@
 package com.fluxenture.core.absent.infrastructure.output.persistence.entity;
 
 import com.fluxenture.core.absent.domain.EAbsentType;
+import com.fluxenture.core.shared.domain.AuditMetadata;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,4 +24,5 @@ public class AbsentEntity {
     private String documentId;
     private String observations;
     private boolean justified;
+    private AuditMetadata audit;
 }

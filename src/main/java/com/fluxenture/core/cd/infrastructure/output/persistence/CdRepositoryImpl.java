@@ -5,6 +5,7 @@ import com.fluxenture.core.cd.domain.Cd;
 import com.fluxenture.core.cd.domain.CdRepository;
 import com.fluxenture.core.cd.infrastructure.output.persistence.entity.CdEntity;
 import com.fluxenture.core.cd.infrastructure.output.persistence.mapper.CdMapper;
+import com.fluxenture.core.shared.domain.AuditMetadata;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -27,9 +28,14 @@ public class CdRepositoryImpl implements CdRepository {
 
     @Override
     public Cd save(Cd newCd) {
+        if (newCd.getAudit() == null) {
+            newCd.setAudit(AuditMetadata.create("SYSTEM"));
+        } else {
+            newCd.getAudit().update("SYSTEM");
+        }
         CdEntity entity = CdMapper.toEntity(newCd);
         mongoTemplate.save(entity);
-        return newCd;
+        return CdMapper.toDomain(entity);
     }
 
     @Override

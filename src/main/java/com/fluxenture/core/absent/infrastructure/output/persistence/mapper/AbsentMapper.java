@@ -18,6 +18,7 @@ public class AbsentMapper {
                 .documentId(entity.getDocumentId())
                 .observations(entity.getObservations())
                 .justified(entity.isJustified())
+                .audit(entity.getAudit())
                 .build();
     }
 
@@ -32,6 +33,7 @@ public class AbsentMapper {
                 .documentId(domain.getDocumentId())
                 .observations(domain.getObservations())
                 .justified(domain.isJustified())
+                .audit(domain.getAudit())
                 .build();
     }
 }

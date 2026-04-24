@@ -1,23 +1,23 @@
 package com.fluxenture.core.employees.application;
 
-import com.fluxenture.core.employees.domain.Employe;
-import com.fluxenture.core.employees.domain.EmployeRepository;
+import com.fluxenture.core.employees.domain.Employee;
+import com.fluxenture.core.employees.domain.EmployeeRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
 public class SaveEmployeeUseCase {
 
-    public final EmployeRepository employeeRepository;
+    public final EmployeeRepository employeeRepository;
 
-    public SaveEmployeeUseCase(EmployeRepository employeeRepository) {
+    public SaveEmployeeUseCase(EmployeeRepository employeeRepository) {
         this.employeeRepository = employeeRepository;
     }
 
-    public ResponseEntity<Employe> execute(Employe employe) {
+    public ResponseEntity<Employee> execute(Employee employee) {
         try{
-            Employe savedEmploye = employeeRepository.save(employe);
-            return ResponseEntity.ok(savedEmploye);
+            Employee savedEmployee = employeeRepository.save(employee);
+            return ResponseEntity.ok(savedEmployee);
         }catch(Exception ex){
             return ResponseEntity.badRequest().build();
         }

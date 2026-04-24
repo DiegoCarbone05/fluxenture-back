@@ -1,11 +1,13 @@
 package com.fluxenture.core.employees.infrastructure.output.persistence;
 
-import com.fluxenture.core.employees.domain.Employe;
-import com.fluxenture.core.employees.domain.EmployeRepository;
+import com.fluxenture.core.docs.domain.Doc;
+import com.fluxenture.core.employees.domain.Employee;
+import com.fluxenture.core.employees.domain.EmployeeRepository;
 import com.fluxenture.core.employees.domain.ResponseDTO;
 import com.fluxenture.core.employees.infrastructure.output.persistence.entity.EmployeeEntity;
 import com.fluxenture.core.employees.infrastructure.output.persistence.mapper.EmployeeMapper;
-import org.apache.coyote.Response;
+import com.fluxenture.core.shared.domain.AuditMetadata;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -13,39 +15,41 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
-public class EmployeRepositoryImpl implements EmployeRepository {
+public class EmployeeRepositoryImpl implements EmployeeRepository {
 
     private final MongoTemplate mongoTemplate;
 
-    public EmployeRepositoryImpl(MongoTemplate mongoTemplate) {
+    public EmployeeRepositoryImpl(MongoTemplate mongoTemplate) {
         this.mongoTemplate = mongoTemplate;
     }
 
-
     @Override
-    public Employe save(Employe employe) {
-        EmployeeEntity entity = EmployeeMapper.toEntity(employe);
+    public Employee save(Employee employee) {
+        if (employee.getAudit() == null) {
+            employee.setAudit(AuditMetadata.create("SYSTEM"));
+        } else {
+            employee.getAudit().update("SYSTEM");
+        }
+        EmployeeEntity entity = EmployeeMapper.toEntity(employee);
         EmployeeEntity savedEntity = mongoTemplate.save(entity);
         return EmployeeMapper.toDomain(savedEntity);
     }
 
     @Override
-    public ResponseEntity<ResponseDTO> loadAllEmployees(List<Employe> employees) {
-
-        try{
+    public ResponseEntity<ResponseDTO> loadAllEmployees(List<Employee> employees) {
+        try {
             List<EmployeeEntity> entities = employees.stream()
                     .map(EmployeeMapper::toEntity)
                     .toList();
             mongoTemplate.insertAll(entities);
             return ResponseEntity.status(HttpStatus.CREATED).body(new ResponseDTO("EMPLEADOS SUBIDOS"));
-        }catch (Exception e){
+        } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
-
     }
 
     @Override
@@ -56,25 +60,34 @@ public class EmployeRepositoryImpl implements EmployeRepository {
 
     @Override
     public void update() {
-
     }
 
     @Override
-    public List<Employe> getAllEmployees() {
+    public List<Employee> getAllEmployees() {
         List<EmployeeEntity> entities = mongoTemplate.findAll(EmployeeEntity.class);
-        // 2. Mapeamos la lista de Entidad a Dominio
         return entities.stream()
-                .map(EmployeeMapper::toDomain) // Usamos el método estático de tu mapper
-                .toList(); // Esto crea la List<Employee> final
+                .map(EmployeeMapper::toDomain)
+                .toList();
     }
 
     @Override
-    public Employe getById(String id) {
+    public Employee getById(String id) {
         EmployeeEntity entity = mongoTemplate.findById(id, EmployeeEntity.class);
         return entity != null ? EmployeeMapper.toDomain(entity) : null;
     }
 
     @Override
-    public void getEmploye() {
+    public void getEmployee() {
     }
+
+
+    @Override
+    public List<Employee> findByName(String name, int size) {
+        Criteria findName = Criteria.where("name").regex(name, "i"); //Crea un criterio de busqueda
+        Query query = new Query(findName).limit(size); //Arma una query con criterio y límite
+        List<EmployeeEntity> entities = mongoTemplate.find(query, EmployeeEntity.class); //Ejecuta la consulta
+        return entities.stream() //convierte al Dominio
+                .map(EmployeeMapper::toDomain)
+                .collect(Collectors.toList());
     }
+}

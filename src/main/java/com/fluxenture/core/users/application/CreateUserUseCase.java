@@ -1,5 +1,6 @@
 package com.fluxenture.core.users.application;
 
+import com.fluxenture.core.shared.domain.AuditMetadata;
 import com.fluxenture.core.shared.security.config.SecurityConfig;
 import com.fluxenture.core.users.domain.User;
 import com.fluxenture.core.users.domain.UserRepository;
@@ -19,6 +20,7 @@ public class CreateUserUseCase {
     public User execute(User newUser) {
         String encodedPassword = securityConfig.passwordEncoder().encode(newUser.getPassword());
         newUser.setPassword(encodedPassword);
+        newUser.setAudit(AuditMetadata.create(newUser.getUsername()));
         return userRepository.save(newUser);
     }
 }

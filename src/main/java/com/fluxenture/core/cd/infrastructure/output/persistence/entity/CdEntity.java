@@ -3,6 +3,7 @@ package com.fluxenture.core.cd.infrastructure.output.persistence.entity;
 import com.mongodb.lang.Nullable;
 import com.fluxenture.core.cd.domain.Cd;
 import com.fluxenture.core.cd.domain.Tnt;
+import com.fluxenture.core.shared.domain.AuditMetadata;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -23,4 +24,5 @@ public class CdEntity {
     private List<Tnt> tnt;
     private String obs;
     private Boolean trackingCompleted;
+    private AuditMetadata audit;
 }

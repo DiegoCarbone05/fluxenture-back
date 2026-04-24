@@ -1,5 +1,6 @@
 package com.fluxenture.core.absent.domain;
 
+import com.fluxenture.core.shared.domain.AuditMetadata;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,4 +20,5 @@ public class Absent {
     private String documentId;    // Google Drive File ID
     private String observations;
     private boolean justified;
+    private AuditMetadata audit;
 }

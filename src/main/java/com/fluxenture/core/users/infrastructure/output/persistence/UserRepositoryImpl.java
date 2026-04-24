@@ -1,5 +1,6 @@
 package com.fluxenture.core.users.infrastructure.output.persistence;
 
+import com.fluxenture.core.shared.domain.AuditMetadata;
 import com.fluxenture.core.users.domain.User;
 import com.fluxenture.core.users.domain.UserRepository;
 import com.fluxenture.core.users.infrastructure.output.persistence.entity.UserEntity;
@@ -20,8 +21,13 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public User save(User newUser) {
-        UserEntity entity = UserMapper.toEntity(newUser);
+    public User save(User user) {
+        if (user.getAudit() == null) {
+            user.setAudit(AuditMetadata.create("SYSTEM"));
+        } else {
+            user.getAudit().update("SYSTEM");
+        }
+        UserEntity entity = UserMapper.toEntity(user);
         mongoTemplate.save(entity);
         return UserMapper.toDomain(entity);
     }
@@ -42,8 +48,7 @@ public class UserRepositoryImpl implements UserRepository {
         Query query = new Query();
         query.addCriteria(Criteria.where("mail").is(mail));
         UserEntity entity = mongoTemplate.findOne(query, UserEntity.class);
-        User user = UserMapper.toDomain(entity);
-        return user;
+        return UserMapper.toDomain(entity);
     }
 
     @Override

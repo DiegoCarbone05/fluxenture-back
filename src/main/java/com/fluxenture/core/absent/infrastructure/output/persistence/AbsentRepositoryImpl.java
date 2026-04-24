@@ -5,6 +5,7 @@ import com.fluxenture.core.absent.domain.AbsentRepository;
 import com.fluxenture.core.absent.domain.AbsentResponseDTO;
 import com.fluxenture.core.absent.infrastructure.output.persistence.entity.AbsentEntity;
 import com.fluxenture.core.absent.infrastructure.output.persistence.mapper.AbsentMapper;
+import com.fluxenture.core.shared.domain.AuditMetadata;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
@@ -30,6 +31,11 @@ public class AbsentRepositoryImpl implements AbsentRepository {
         // Aseguramos que si no hay endDate, sea igual a startDate (ausencia de un solo día)
         if (absent.getEndDate() == null) {
             absent.setEndDate(absent.getStartDate());
+        }
+        if (absent.getAudit() == null) {
+            absent.setAudit(AuditMetadata.create("SYSTEM"));
+        } else {
+            absent.getAudit().update("SYSTEM");
         }
         AbsentEntity entity = mapper.toEntity(absent);
         return mapper.toDomain(mongoRepository.save(entity));

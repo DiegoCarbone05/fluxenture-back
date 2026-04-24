@@ -1,6 +1,8 @@
 package com.fluxenture.core.employees.infrastructure.output.persistence.entity;
 
 import com.fluxenture.core.employees.domain.ESector;
+import com.fluxenture.core.employees.domain.EService;
+import com.fluxenture.core.shared.domain.AuditMetadata;
 import jakarta.annotation.Nullable;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
@@ -25,7 +27,8 @@ public class EmployeeEntity {
     private Long cuil; // Cambiado a Long para evitar desbordamiento (11 dígitos)
 
     private ESector sector;
-    private Boolean isOperational = true;
+    private EService service;
+    private Boolean isOperational;
 
     // --- Datos de Identidad y Estado ---
     private String documentType;
@@ -54,4 +57,7 @@ public class EmployeeEntity {
     private String entryDate;
     @Nullable
     private String leaveDate;
+
+    // --- Auditoría ---
+    private AuditMetadata audit;
 }

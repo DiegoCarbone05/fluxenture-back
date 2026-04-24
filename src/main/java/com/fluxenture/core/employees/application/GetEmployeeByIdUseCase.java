@@ -1,7 +1,7 @@
 package com.fluxenture.core.employees.application;
 
-import com.fluxenture.core.employees.domain.Employe;
-import com.fluxenture.core.employees.domain.EmployeRepository;
+import com.fluxenture.core.employees.domain.Employee;
+import com.fluxenture.core.employees.domain.EmployeeRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -9,17 +9,17 @@ import org.springframework.stereotype.Service;
 @Service
 public class GetEmployeeByIdUseCase {
 
-    private final EmployeRepository employeRepository;
+    private final EmployeeRepository employeeRepository;
 
-    public GetEmployeeByIdUseCase(EmployeRepository employeRepository) {
-        this.employeRepository = employeRepository;
+    public GetEmployeeByIdUseCase(EmployeeRepository employeeRepository) {
+        this.employeeRepository = employeeRepository;
     }
 
-    public ResponseEntity<Employe> execute(String id) {
+    public ResponseEntity<Employee> execute(String id) {
         try {
-            Employe employe = employeRepository.getById(id);
-            if (employe != null) {
-                return ResponseEntity.ok(employe);
+            Employee employee = employeeRepository.getById(id);
+            if (employee != null) {
+                return ResponseEntity.ok(employee);
             } else {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }

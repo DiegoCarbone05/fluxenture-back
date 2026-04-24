@@ -12,19 +12,20 @@ public class DocMapper {
         entity.setDriveFileId(domain.getDriveFileId());
         entity.setUploadDate(domain.getUploadDate());
         entity.setDescription(domain.getDescription());
-        entity.setUser(domain.getUser());
+        entity.setAudit(domain.getAudit());
         return entity;
     }
 
     public static Doc toDomain(DocEntity entity) {
-        Doc domain = new Doc();
-        domain.setId(entity.getId());
-        domain.setEmployeeId(entity.getEmployeeId());
-        domain.setType(entity.getType());
-        domain.setDriveFileId(entity.getDriveFileId());
-        domain.setUploadDate(entity.getUploadDate());
-        domain.setDescription(entity.getDescription());
-        domain.setUser(entity.getUser());
-        return domain;
+        if (entity == null) return null;
+        return Doc.builder()
+                .id(entity.getId())
+                .employeeId(entity.getEmployeeId())
+                .type(entity.getType())
+                .driveFileId(entity.getDriveFileId())
+                .uploadDate(entity.getUploadDate())
+                .description(entity.getDescription())
+                .audit(entity.getAudit())
+                .build();
     }
 }

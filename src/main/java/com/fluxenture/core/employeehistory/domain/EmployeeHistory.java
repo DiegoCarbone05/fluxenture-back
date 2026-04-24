@@ -1,5 +1,6 @@
 package com.fluxenture.core.employeehistory.domain;
 
+import com.fluxenture.core.shared.domain.AuditMetadata;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,4 +18,5 @@ public class EmployeeHistory {
     private String employeeName;
     private String description;
     private String docId;
+    private AuditMetadata audit;
 }

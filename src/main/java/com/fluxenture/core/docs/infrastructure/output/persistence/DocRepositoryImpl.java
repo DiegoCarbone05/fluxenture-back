@@ -4,6 +4,7 @@ import com.fluxenture.core.docs.domain.Doc;
 import com.fluxenture.core.docs.domain.DocRepository;
 import com.fluxenture.core.docs.infrastructure.output.persistence.entity.DocEntity;
 import com.fluxenture.core.docs.infrastructure.output.persistence.mapper.DocMapper;
+import com.fluxenture.core.shared.domain.AuditMetadata;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -22,10 +23,16 @@ public class DocRepositoryImpl implements DocRepository {
 
     @Override
     public Doc save(Doc doc) {
+        if (doc.getAudit() == null) {
+            doc.setAudit(AuditMetadata.create("SYSTEM"));
+        } else {
+            doc.getAudit().update("SYSTEM");
+        }
         DocEntity entity = DocMapper.toEntity(doc);
         DocEntity savedEntity = mongoTemplate.save(entity);
         return DocMapper.toDomain(savedEntity);
     }
+
 
     @Override
     public List<Doc> findByEmployeeId(String employeeId) {
@@ -51,4 +58,5 @@ public class DocRepositoryImpl implements DocRepository {
         DocEntity entity = mongoTemplate.findById(id, DocEntity.class);
         return entity != null ? DocMapper.toDomain(entity) : null;
     }
+
 }

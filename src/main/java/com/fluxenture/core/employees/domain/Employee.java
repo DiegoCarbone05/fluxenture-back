@@ -1,27 +1,32 @@
 package com.fluxenture.core.employees.domain;
 
+import com.fluxenture.core.shared.domain.AuditMetadata;
 import jakarta.annotation.Nullable;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Employe {
+public class Employee {
     @Nullable
     private String id;
-    private long cuil; // Cambiado a long para soportar los 11 dígitos del CUIL
+    private long cuil;
     private String name;
     private int employeeID; // Legajo
     private Boolean isOperational = true;
     private ESector sector;
+    private EService service;
 
     // --- Identidad y Estado Civil ---
     private String documentType;
     private String documentNumber;
-    private String birthDate;    // Fecha de Nacimiento
+    private LocalDate birthDate;    // Fecha de Nacimiento
     private String gender;       // Sexo
     private String civilStatus;  // Estado Civil
     private String nationality;  // Nacionalidad
@@ -42,7 +47,10 @@ public class Employe {
 
     // --- Fechas de Contrato ---
     @Nullable
-    private String entryDate;    // Fecha de alta
+    private LocalDate entryDate;    // Fecha de alta
     @Nullable
-    private String leaveDate;    // Fecha de baja
+    private LocalDate leaveDate;    // Fecha de baja
+
+    // --- Auditoría ---
+    private AuditMetadata audit;
 }
